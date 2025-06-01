@@ -13,4 +13,5 @@ urlpatterns = [
     path('addTeacher/', addTeacherPage, name='addTeacherPage'),
     path('addTeacher/teacherList/', teacherListPage, name='teacherListPage'),
     path('deleteTeacher/<int:myid>/', deleteTeacher, name='deleteTeacher'),
+    path('updateTeacher/<int:myid>/', updateTeacher, name='updateTeacher'),
 ]

@@ -70,3 +70,20 @@ def teacherListPage(request):
 def deleteTeacher(request, myid):
     teacher = teacherModel.objects.get(id=myid).delete()
     return redirect('teacherListPage')
+
+def updateTeacher(request, myid):
+    context ={
+        'teachers': teacherModel.objects.get(id=myid)
+    }
+    if request.method == 'POST':
+        teacher_data = teacherModel(
+            id = myid,
+            Teacher_Name = request.POST.get('Teacher_Name'),
+            Teacher_Email = request.POST.get('Teacher_Email'),
+            Teacher_Department = request.POST.get('Teacher_Department'),
+            Teacher_Experience = request.POST.get('Teacher_Experience'),
+        )
+        teacher_data.save()
+        return redirect('teacherListPage')
+    return render(request, 'updateTeacher.html', context)
+

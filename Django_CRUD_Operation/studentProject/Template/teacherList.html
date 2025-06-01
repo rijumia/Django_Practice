@@ -23,8 +23,8 @@
           <td>{{ teacher.Teacher_Department }}</td>
           <td>{{ teacher.Teacher_Experience }}</td>
           <td>
-            <a href="">Edit</a> |
-            <a href="{% url 'deleteTeacher' teacher.id %}" onclick="return confirm('Are you sure?')">Delete</a>
+            <button><a href="{% url 'updateTeacher' teacher.id %}">Edit</a></button>
+            <button><a href="{% url 'deleteTeacher' teacher.id %}" onclick="return confirm('Are you sure?')">Delete</a></button>
           </td>
         </tr>
       {% empty %}
