@@ -9,4 +9,8 @@ urlpatterns = [
     path('studentList/', studentListPage, name='studentListPage'),
     path('deleteStudent/<int:myid>/', deleteStudent, name='deleteStudent'),
     path('updateStudent/<int:myid>/', updateStudent, name='updateStudent'),
+
+    path('addTeacher/', addTeacherPage, name='addTeacherPage'),
+    path('addTeacher/teacherList/', teacherListPage, name='teacherListPage'),
+    path('deleteTeacher/<int:myid>/', deleteTeacher, name='deleteTeacher'),
 ]
