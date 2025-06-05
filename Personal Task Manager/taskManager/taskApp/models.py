@@ -6,3 +6,5 @@ class TaskModel(models.Model):
     description = models.TextField(blank=True)
     deadline = models.DateField()
     completed = models.BooleanField(default=False)
+
+
