@@ -1,10 +1,23 @@
 {% extends 'base.html' %}
 
-    {% block title %}
-<title>Welcome to Home Page</title>
-    {% endblock title %}
+{% block title %}
+<title>View User</title>
+{% endblock title %}
 
+{% block body %}
+<section style="padding: 2rem; font-family: 'Segoe UI', sans-serif;">
+  <div style="max-width: 600px; margin: 0 auto; background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+    <h2 style="text-align: center; margin-bottom: 1.5rem;">User Details</h2>
 
-    {% block body %}
+    <p><strong>User Name:</strong> {{ user.username }}</p>
+    <p><strong>First Name:</strong> {{ user.first_name }}</p>
+    <p><strong>Last Name:</strong> {{ user.last_name }}</p>
+    <p><strong>Full Name:</strong> {{ user.first_name }} {{ user.last_name }}</p>
 
-    {% endblock body %}
+    <div style="margin-top: 2rem;">
+      <a href="" style="padding: 8px 14px; background: #ffc107; color: black; text-decoration: none; border-radius: 5px;">Edit</a>
+      <a href="" style="padding: 8px 14px; background: #007bff; color: white; text-decoration: none; border-radius: 5px;">Back to List</a>
+    </div>
+  </div>
+</section>
+{% endblock body %}
