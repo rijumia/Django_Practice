@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+
+    {% block title %}
+<title>Show All User List</title>
+    {% endblock title %}
+
+
+    {% block body %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>User List Table</title>
+  <style>
+    section {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f9f9f9;
+      padding: 2rem;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      color: #333;
+    }
+
+    .table-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 600px;
+    }
+
+    thead {
+      background-color: #0077ff;
+      color: #fff;
+    }
+
+    th, td {
+      padding: 0.75rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    tbody tr:hover {
+      background-color: #f1f5ff;
+    }
+
+    @media (max-width: 768px) {
+      th, td {
+        padding: 0.5rem 0.75rem;
+      }
+    }
+  </style>
+</head>
+<section>
+
+  <h2>User List</h2>
+
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>User Name</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Full Name</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>jdoe</td>
+          <td>John</td>
+          <td>Doe</td>
+          <td>John Doe</td>
+        </tr>
+        <tr>
+          <td>asmith</td>
+          <td>Anna</td>
+          <td>Smith</td>
+          <td>Anna Smith</td>
+        </tr>
+        <tr>
+          <td>mjane</td>
+          <td>Mary</td>
+          <td>Jane</td>
+          <td>Mary Jane</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</section>
+</html>
+
+    {% endblock body %}
