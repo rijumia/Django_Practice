@@ -1,17 +1,67 @@
-from django.shortcuts import render
-
+from django.shortcuts import render, redirect
+from userApp.models import userModel
+import random
 
 def homePage(request):
-    return render(request, 'home.html')
+
+    user = userModel.objects.all()
+
+
+
+    return render(request, 'home.html', {'users': user})
 
 def addPage(request):
+    if request.method=='POST':
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        full_name = f"{first_name} {last_name}"
+        user_name = f"{first_name.lower()}_{last_name.lower()}_{random.randint(1000, 9999)}"
+
+        # Create a new userModel instance
+        new_user = userModel(
+            First_Name=first_name,
+            Last_Name=last_name,
+            Full_Name=full_name,
+            User_Name=user_name
+        )
+        new_user.save()
+        return redirect('listPage')
     return render(request, 'addUser.html')
 
 def listPage(request):
-    return render(request, 'userList.html')
+    users = userModel.objects.all()
 
-def editPage(request):
-    return render(request, 'userUpdate.html')
+    return render(request, 'userList.html', {'users': users})
 
-def viewPage(request):
-    return render(request, 'userDetails.html')
+def editPage(request, id):
+    user = userModel.objects.get(id=id)
+
+    if request.method == 'POST':
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        full_name = f"{first_name} {last_name}"
+        user_name = f"{first_name.lower()}_{last_name.lower()}_{random.randint(1000, 9999)}"
+
+        # Update user
+        user.First_Name = first_name
+        user.Last_Name = last_name
+        user.Full_Name = full_name
+        user.User_Name = user_name
+        user.save()
+
+        return redirect('listPage')
+
+    # Render the form with current user data
+    return render(request, 'userUpdate.html', {'user': user})
+
+
+def viewPage(request, id):
+    users = userModel.objects.get(id=id)
+
+    return render(request, 'userDetails.html', {'users': users})
+
+def deletePage(request, id):
+    users = userModel.objects.get(id=id)
+    users.delete()
+    return redirect('listPage')
+
