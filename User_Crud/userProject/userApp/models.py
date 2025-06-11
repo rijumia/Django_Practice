@@ -7,6 +7,6 @@ class userModel(models.Model):
     User_Name = models.CharField(max_length=100, unique=True)
 
     def __str__(self):
-        return self.User_Name
+        return self.Full_Name
     
 
