@@ -29,8 +29,19 @@ def add_book(req):
         return redirect('all_books')
     return render(req, 'addbook.html', {'books': books})
 
-def update_book(req):
-    return render(req, 'updatebook.html')
+def update_book(req, id):
+    book = bookModel.objects.get(id=id)
+    if req.method == 'POST':
+        id = id
+        book.book_name = req.POST.get('book_name')
+        book.author_name = req.POST.get('author_name')
+        book.book_price = req.POST.get('book_price')
+        book.book_description = req.POST.get('book_description')
+        if 'book_image' in req.FILES:
+            book.book_image = req.FILES['book_image']
+        book.save()
+        return redirect('all_books')
+    return render(req, 'updatebook.html', {'book': book})
 
 def delete_book(req, id):
     book= bookModel.objects.get(id=id)

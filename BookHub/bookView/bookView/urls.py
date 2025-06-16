@@ -9,6 +9,6 @@ urlpatterns = [
     path('', home, name='home'),
     path('allbooks/', all_books, name='all_books'),
     path('addbook/', add_book, name='add_book'),
-    path('updatebook/', update_book, name='update_book'),
+    path('updatebook/<str:id>/', update_book, name='update_book'),
     path('deletebook/<str:id>/', delete_book, name='delete_book'),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
