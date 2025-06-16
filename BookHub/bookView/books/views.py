@@ -31,3 +31,8 @@ def add_book(req):
 
 def update_book(req):
     return render(req, 'updatebook.html')
+
+def delete_book(req, id):
+    book= bookModel.objects.get(id=id)
+    book.delete()
+    return redirect('all_books')
