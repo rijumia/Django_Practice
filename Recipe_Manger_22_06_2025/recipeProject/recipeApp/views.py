@@ -84,7 +84,6 @@ def signinPage(req):
             return redirect('loginPage')
         else:
             return redirect('wrongPage')
-
     return render(req, 'signup.html')
 
 def logoutPage(req):
