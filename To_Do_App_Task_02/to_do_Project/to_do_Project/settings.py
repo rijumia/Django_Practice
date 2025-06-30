@@ -122,3 +122,4 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'to_do_App.CustomUserModel'
+LOGIN_URL = 'loginPage'

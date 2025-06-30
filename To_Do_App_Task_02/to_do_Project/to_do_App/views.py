@@ -45,10 +45,12 @@ def registerPage(request):
 
     return render(request, 'register.html')
 
+@login_required
 def logoutPage(request):
     logout(request)
     return redirect('loginPage')
 
+@login_required
 def changePassword(request):
     current_user = request.user
     if request.method == 'POST':
@@ -63,5 +65,63 @@ def changePassword(request):
                 return redirect('loginPage')
     return render(request, 'changePassword.html')
 
+@login_required
 def homePage(request):
-    return render(request, 'home.html')
+    total_task = ToDoModel.objects.filter(user=request.user)
+    pending_task = ToDoModel.objects.filter(user=request.user, status='pending')
+    in_progress_task = ToDoModel.objects.filter(user=request.user, status='in_progress')
+    completed_task = ToDoModel.objects.filter(user=request.user, status='completed')
+
+    return render(request, 'home.html', {
+        'total_task': total_task,
+        'pending_task': pending_task,
+        'in_progress_task': in_progress_task,
+        'completed_task': completed_task
+    })
+
+@login_required
+def addToDo(request):
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        description = request.POST.get('description')
+        status = request.POST.get('status')
+        due_date = request.POST.get('due_date')
+
+        new_todo = ToDoModel.objects.create(
+            user=request.user,
+            title=title,
+            description=description,
+            status=status,
+            due_date=due_date
+        )
+        return redirect('homePage')
+
+    return render(request, 'add_todo.html')
+
+@login_required
+def listToDo(request):
+    todos = ToDoModel.objects.filter(user=request.user)
+    return render(request, 'list_todo.html', {'todos': todos})
+
+@login_required
+def viewToDo(request, id):
+    todo = ToDoModel.objects.get(id=id, user=request.user)
+    return render(request, 'view_todo.html', {'todo': todo})
+
+@login_required
+def editToDo(request, id):
+    todo = ToDoModel.objects.get(id=id, user=request.user)
+    if request.method == 'POST':
+        todo.title = request.POST.get('title')
+        todo.description = request.POST.get('description')
+        todo.status = request.POST.get('status')
+        todo.due_date = request.POST.get('due_date')
+        todo.save()
+        return redirect('viewToDo', id=todo.id)
+    return render(request, 'update_todo.html', {'todo': todo})
+
+@login_required
+def deleteToDo(request, id):
+    todo = ToDoModel.objects.get(id=id, user=request.user)
+    todo.delete()
+    return redirect('listToDo')

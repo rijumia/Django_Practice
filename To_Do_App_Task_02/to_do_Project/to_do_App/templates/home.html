@@ -11,7 +11,7 @@
       <div class="card shadow-sm border-start border-primary border-4">
         <div class="card-body text-center">
           <h5 class="card-title text-muted">Total Tasks</h5>
-          <h2 class="text-primary">{{ total_tasks }}</h2>
+          <h2 class="text-primary">{{ total_task.count }}</h2>
         </div>
       </div>
     </div>
@@ -20,7 +20,7 @@
       <div class="card shadow-sm border-start border-warning border-4">
         <div class="card-body text-center">
           <h5 class="card-title text-muted">In Processing</h5>
-          <h2 class="text-warning">{{ in_processing }}</h2>
+          <h2 class="text-warning">{{ in_progress_task.count }}</h2>
         </div>
       </div>
     </div>
@@ -29,7 +29,7 @@
       <div class="card shadow-sm border-start border-danger border-4">
         <div class="card-body text-center">
           <h5 class="card-title text-muted">Pending</h5>
-          <h2 class="text-danger">{{ pending }}</h2>
+          <h2 class="text-danger">{{ pending_task.count }}</h2>
         </div>
       </div>
     </div>
@@ -38,7 +38,7 @@
       <div class="card shadow-sm border-start border-success border-4">
         <div class="card-body text-center">
           <h5 class="card-title text-muted">Completed</h5>
-          <h2 class="text-success">{{ completed }}</h2>
+          <h2 class="text-success">{{ completed_task.count }}</h2>
         </div>
       </div>
     </div>
@@ -50,7 +50,7 @@
       <h5 class="mb-0">Pending Tasks</h5>
     </div>
     <div class="card-body">
-      {% if pending_tasks %}
+      {% if pending_task %}
         <div class="table-responsive">
           <table class="table table-bordered align-middle table-hover">
             <thead class="table-light">
@@ -63,11 +63,85 @@
               </tr>
             </thead>
             <tbody>
-              {% for task in pending_tasks %}
+              {% for task in pending_task %}
               <tr>
                 <td>{{ forloop.counter }}</td>
                 <td>{{ task.title }}</td>
-                <td>{{ task.description|truncatewords:12 }}</td>
+                <td>{{ task.description }}</td>
+                <td>{{ task.created_at|date:"M d, Y" }}</td>
+                <td><span class="badge bg-danger">{{ task.status }}</span></td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      {% else %}
+        <p class="text-muted">No pending tasks found.</p>
+      {% endif %}
+    </div>
+  </div>
+
+    <!-- in_progress Tasks Table -->
+  <div class="card shadow-sm my-4">
+    <div class="card-header bg-warning text-white">
+      <h5 class="mb-0">In Progress Tasks</h5>
+    </div>
+    <div class="card-body">
+      {% if in_progress_task %}
+        <div class="table-responsive">
+          <table class="table table-bordered align-middle table-hover">
+            <thead class="table-light">
+              <tr>
+                <th>#</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Created At</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for task in in_progress_task %}
+              <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ task.title }}</td>
+                <td>{{ task.description }}</td>
+                <td>{{ task.created_at|date:"M d, Y" }}</td>
+                <td><span class="badge bg-danger">{{ task.status }}</span></td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      {% else %}
+        <p class="text-muted">No pending tasks found.</p>
+      {% endif %}
+    </div>
+  </div>
+
+      <!-- completed Tasks Table -->
+  <div class="card shadow-sm">
+    <div class="card-header bg-success text-white">
+      <h5 class="mb-0">Completed Tasks</h5>
+    </div>
+    <div class="card-body">
+      {% if completed_task %}
+        <div class="table-responsive">
+          <table class="table table-bordered align-middle table-hover">
+            <thead class="table-light">
+              <tr>
+                <th>#</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Created At</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for task in completed_task %}
+              <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ task.title }}</td>
+                <td>{{ task.description }}</td>
                 <td>{{ task.created_at|date:"M d, Y" }}</td>
                 <td><span class="badge bg-danger">{{ task.status }}</span></td>
               </tr>
