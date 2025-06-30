@@ -13,6 +13,8 @@ def loginPage(request):
         if user is not None:
             login(request, user)
             return redirect('homePage')
+        else:
+            return redirect('custom_error')
         
     return render(request, 'login.html')
 
@@ -43,6 +45,8 @@ def registerPage(request):
                 address=address
             )
             return redirect('loginPage')
+        else:
+            return redirect('custom_error')
 
     return render(request, 'register.html')
 
@@ -64,6 +68,9 @@ def changePassword(request):
                 current_user.save()
                 update_session_auth_hash(request, current_user)
                 return redirect('loginPage')
+        else:
+            return redirect('custom_error')
+        
     return render(request, 'changePassword.html')
 
 @login_required
