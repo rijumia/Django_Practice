@@ -126,3 +126,6 @@ def deleteToDo(request, id):
     todo = ToDoModel.objects.get(id=id, user=request.user)
     todo.delete()
     return redirect('listToDo')
+
+def custom_error(request, exception=None):
+    return render(request, 'Error.html', {'message': 'The requested page could not be found.'}, status=404)

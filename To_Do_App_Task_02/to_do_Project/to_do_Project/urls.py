@@ -17,4 +17,6 @@ urlpatterns = [
     path('viewToDo/<str:id>/', viewToDo, name='viewToDo'),
     path('editToDo/<str:id>/', editToDo, name='editToDo'),
     path('deleteToDo/<str:id>/', deleteToDo, name='deleteToDo'),
+
+    path('error/', custom_error, name='custom_error'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
