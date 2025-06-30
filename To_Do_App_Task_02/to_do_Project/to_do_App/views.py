@@ -3,6 +3,7 @@ from django.contrib.auth import authenticate, login, logout, update_session_auth
 from django.contrib.auth.decorators import login_required
 from to_do_App.models import CustomUserModel, ToDoModel
 from django.contrib.auth.hashers import check_password
+from django.contrib import messages
 
 def loginPage(request):
     if request.method == 'POST':
@@ -29,6 +30,7 @@ def registerPage(request):
         confirm_password = request.POST.get('confirm_password')
 
         if password == confirm_password:
+            messages.error(request, "Passwords do not match.")
             user = CustomUserModel.objects.create_user(
                 username=username,
                 email=email,
