@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+
+  <!-- Dashboard Cards -->
+  <div class="row g-4 mb-4">
+    <div class="col-md-3">
+      <div class="card shadow-sm border-start border-primary border-4">
+        <div class="card-body text-center">
+          <h5 class="card-title text-muted">Total Tasks</h5>
+          <h2 class="text-primary">{{ total_tasks }}</h2>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card shadow-sm border-start border-warning border-4">
+        <div class="card-body text-center">
+          <h5 class="card-title text-muted">In Processing</h5>
+          <h2 class="text-warning">{{ in_processing }}</h2>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card shadow-sm border-start border-danger border-4">
+        <div class="card-body text-center">
+          <h5 class="card-title text-muted">Pending</h5>
+          <h2 class="text-danger">{{ pending }}</h2>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card shadow-sm border-start border-success border-4">
+        <div class="card-body text-center">
+          <h5 class="card-title text-muted">Completed</h5>
+          <h2 class="text-success">{{ completed }}</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pending Tasks Table -->
+  <div class="card shadow-sm">
+    <div class="card-header bg-danger text-white">
+      <h5 class="mb-0">Pending Tasks</h5>
+    </div>
+    <div class="card-body">
+      {% if pending_tasks %}
+        <div class="table-responsive">
+          <table class="table table-bordered align-middle table-hover">
+            <thead class="table-light">
+              <tr>
+                <th>#</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Created At</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for task in pending_tasks %}
+              <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ task.title }}</td>
+                <td>{{ task.description|truncatewords:12 }}</td>
+                <td>{{ task.created_at|date:"M d, Y" }}</td>
+                <td><span class="badge bg-danger">{{ task.status }}</span></td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      {% else %}
+        <p class="text-muted">No pending tasks found.</p>
+      {% endif %}
+    </div>
+  </div>
+
+</div>
+{% endblock %}
