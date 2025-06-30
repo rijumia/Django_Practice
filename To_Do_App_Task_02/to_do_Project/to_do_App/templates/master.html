@@ -50,34 +50,36 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'home' %}">Home</a>
+          <a class="nav-link" href="{% url 'homePage' %}">Home</a>
+        </li>
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link" href="">Add To-Do</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'add_todo' %}">Add To-Do</a>
+          <a class="nav-link" href="">List To-Do</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'list_todo' %}">List To-Do</a>
-        </li>
+        {% endif %}
       </ul>
 
       {% if user.is_authenticated %}
       <ul class="navbar-nav ms-auto">
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown">
-            <img src="{{ user.profile.image.url }}" class="user-pic" alt="Profile">
+            <img src="/{{ request.user.user_image }}" class="user-pic" alt="Profile">
             {{ user.username }}
           </a>
           <ul class="dropdown-menu dropdown-menu-end shadow">
-            <li><span class="dropdown-item-text"><strong>{{ user.get_full_name }}</strong></span></li>
-            <li><span class="dropdown-item-text text-muted">{{ user.email }}</span></li>
+            <li><span class="dropdown-item-text"><strong>{{ request.user.full_name }}</strong></span></li>
+            <li><span class="dropdown-item-text text-muted">{{ request.user.email }}</span></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="{% url 'change_password' %}">Change Password</a></li>
-            <li><a class="dropdown-item text-danger" href="{% url 'logout' %}">Logout</a></li>
+            <li><a class="dropdown-item" href="{% url 'changePassword' %}">Change Password</a></li>
+            <li><a class="dropdown-item text-danger" href="{% url 'logoutPage' %}">Logout</a></li>
           </ul>
         </li>
       </ul>
       {% else %}
-      <a class="btn btn-outline-primary" href="{% url 'login' %}">Login</a>
+      <a class="btn btn-outline-primary" href="{% url 'loginPage' %}">Login</a>
       {% endif %}
     </div>
   </div>

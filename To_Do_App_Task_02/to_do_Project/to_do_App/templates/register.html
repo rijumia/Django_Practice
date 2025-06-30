@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'master.html' %}
 {% block title %}Sign Up{% endblock %}
 
 {% block content %}
@@ -79,7 +79,7 @@
           </form>
         </div>
         <div class="card-footer text-center">
-          <small>Already have an account? <a href="{% url 'login' %}">Login here</a></small>
+          <small>Already have an account? <a href="{% url 'loginPage' %}">Login here</a></small>
         </div>
       </div>
     </div>
