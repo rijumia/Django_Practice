@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, HttpResponse
 from instituteApp.models import CustomUserModel, TeacherModel, StudentModel
 
 def registerPage(request):
@@ -16,6 +16,32 @@ def registerPage(request):
 
 
         if password == confirm_password:
-            user = Cus
+            userData = CustomUserModel.objects.create_user(
+                username = username,
+                password= password,
+                email = email,
+                user_type = usertype,
+            )
+            userData.save()
+
+            if userData:
+                if userData.user_type == 'teacher':
+                    TeacherModel.objects.create(
+                        user = userData,
+                        full_name = fullname,
+                        address= address,
+                        contact_number = contact,
+                        designation = designation,
+                    )
+                else:
+                    StudentModel.objects.create(
+                        user = userData,
+                        full_name = fullname,
+                        address= address,
+                        contact_number = contact,
+                        department = department,
+                    )
+        else:
+            return HttpResponse('Passwords do not match.')
 
     return render(request, 'register.html')
