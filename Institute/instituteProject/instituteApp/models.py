@@ -14,3 +14,7 @@ class TeacherModel(models.Model):
     address = models.CharField(max_length=200, null=True)
     contact_number = models.CharField(max_length=15, null=True)
     designation = models.CharField(max_length=50, null=True)
+
+    def __str__(self):
+        return f"{self.full_name} - {self.designation}"
+    
