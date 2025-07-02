@@ -41,6 +41,7 @@ def registerPage(request):
                         contact_number = contact,
                         department = department,
                     )
+                    return redirect('loginPage')
         else:
             return HttpResponse('Passwords do not match.')
 
