@@ -1,3 +1,5 @@
 from django.contrib import admin
+from JobApp.models import CustomUserModel, JobModel
 
-# Register your models here.
+admin.site.register(CustomUserModel)
+admin.site.register(JobModel)
