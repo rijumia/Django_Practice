@@ -1,3 +1,14 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
-# Create your views here.
+
+def loginPage(request):
+    return render(request, 'login.html')
+
+def signupPage(request):
+    return render(request, 'signup.html')
+
+def changePasswordPage(request):
+    return render(request, 'changePassword.html')
+
+def logoutPage(request):
+    return redirect('loginPage')
