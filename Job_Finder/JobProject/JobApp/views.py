@@ -94,3 +94,23 @@ def addJobPage(request):
 def jobViewPage(request,id):
     job = JobModel.objects.get(id=id)
     return render(request, 'jobView.html', {'job':job})
+
+def jobEditPage(request,id):
+    jobUpdate = JobModel.objects.get(id=id)
+    if request.method == 'POST':
+        jobUpdate.JobTitle = request.POST.get('JobTitle')
+        jobUpdate.JobDescription = request.POST.get('JobDescription')
+        jobUpdate.Job_type = request.POST.get('Job_type')
+       
+        if request.FILES.get('CompanyLogo'):
+             jobUpdate.CompanyLogo = request.FILES.get('CompanyLogo')
+
+        jobUpdate.save()
+        return redirect('jobFeedPage')
+    return render(request, 'jobEdit.html',{'jobUpdate':jobUpdate})
+
+
+def jobDeletePage(request,id):
+    job = JobModel.objects.get(id=id)
+    job.delete()
+    return redirect('jobFeedPage')

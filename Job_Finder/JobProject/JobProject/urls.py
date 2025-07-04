@@ -17,4 +17,6 @@ urlpatterns = [
     path('jobFeedPage/', jobFeedPage, name='jobFeedPage'),
     path('addJobPage/', addJobPage, name='addJobPage'),
     path('jobViewPage/<str:id>/', jobViewPage, name='jobViewPage'),
+    path('jobEditPage/<str:id>/', jobEditPage, name='jobEditPage'),
+    path('jobDeletePage/<str:id>/', jobDeletePage, name='jobDeletePage'),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
