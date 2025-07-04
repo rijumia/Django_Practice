@@ -1,5 +1,7 @@
 from django.contrib import admin
 from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static
 from JobApp.views import*
 
 urlpatterns = [
@@ -14,4 +16,5 @@ urlpatterns = [
     path('homePage/', homePage, name='homePage'),
     path('jobFeedPage/', jobFeedPage, name='jobFeedPage'),
     path('addJobPage/', addJobPage, name='addJobPage'),
+    path('jobViewPage/<str:id>/', jobViewPage, name='jobViewPage'),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

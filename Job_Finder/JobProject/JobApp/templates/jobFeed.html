@@ -1,32 +1,40 @@
 {% extends 'master.html' %}
 
-
 {% block body %}
-<div class="container py-4">
-  <h2 class="mb-4">Job Feed</h2>
+<div class="container py-5">
+  <h2 class="mb-4 text-primary fw-bold text-center">Latest Job Listings</h2>
 
   {% if jobs %}
-    <div class="row row-cols-1 row-cols-md-2 g-4">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
       {% for job in jobs %}
         <div class="col">
-          <div class="card h-100 shadow-sm">
-            {% if job.CompanyLogo %}
-              <img src="/{{ job.CompanyLogo }}" class="card-img-top" alt="Company Logo" style="max-height: 200px; object-fit: contain;">
-            {% endif %}
+          <div class="card h-100 border-0 shadow-sm rounded-4">
+            <div class="text-center p-3 bg-light">
+              {% if job.CompanyLogo %}
+                <img src="/{{ job.CompanyLogo }}" class="img-fluid" style="max-height: 80px; object-fit: contain;" alt="Company Logo">
+              {% else %}
+                <div class="text-muted small">No Logo</div>
+              {% endif %}
+            </div>
             <div class="card-body">
-              <h5 class="card-title">{{ job.JobTitle }}</h5>
-              <p class="card-text text-muted">{{ job.JobDescription|truncatewords:25 }}</p>
-              <p class="card-text"><small class="text-muted"><strong>Posted by:</strong> {{ job.CreateBy.username|capfirst }}</small></p>
-              <div class="d-flex justify-content-end">
-                <a href="" class="btn btn-outline-primary btn-sm">View</a>
-              </div>
+              <h5 class="card-title text-dark fw-semibold">{{ job.JobTitle }}</h5>
+              <p class="card-text text-muted small">{{ job.JobDescription|truncatewords:25 }}</p>
+              <p class="card-text">
+                <span class="badge bg-info text-dark">{{ job.Job_type|capfirst }}</span><br>
+                <small class="text-muted"><strong>Posted by:</strong> {{ job.CreateBy.username|capfirst }}</small>
+              </p>
+            </div>
+            <div class="card-footer bg-white border-0 d-flex justify-content-between">
+              <a href="{% url 'jobViewPage' job.id %}" class="btn btn-sm btn-outline-primary">View</a>
+              <a href="" class="btn btn-sm btn-outline-warning">Edit</a>
+              <a href="" class="btn btn-sm btn-outline-danger">Delete</a>
             </div>
           </div>
         </div>
       {% endfor %}
     </div>
   {% else %}
-    <p>No job posts available.</p>
+    <div class="alert alert-info text-center mt-5">No job posts available at the moment.</div>
   {% endif %}
 </div>
 {% endblock body %}

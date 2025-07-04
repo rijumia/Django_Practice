@@ -79,7 +79,7 @@ def addJobPage(request):
         JobTitle = request.POST.get('JobTitle')
         JobDescription = request.POST.get('JobDescription')
         Job_type = request.POST.get('Job_type')
-        CompanyLogo = request.POST.get('CompanyLogo')
+        CompanyLogo = request.FILES.get('CompanyLogo')
 
         JobModel.objects.create(
             CreateBy = request.user,
@@ -90,3 +90,7 @@ def addJobPage(request):
         )
         return redirect('jobFeedPage')
     return render(request, 'addJob.html')
+
+def jobViewPage(request,id):
+    job = JobModel.objects.get(id=id)
+    return render(request, 'jobView.html', {'job':job})
