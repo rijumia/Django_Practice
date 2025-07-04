@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from JobApp.models import CustomUserModel, JobModel
 from django.contrib.auth.hashers import check_password
+from django.contrib.auth.decorators import login_required
 
 def loginPage(request):
     if request.method == 'POST':
@@ -42,6 +43,7 @@ def signupPage(request):
             return redirect('loginPage')
     return render(request, 'signup.html')
 
+@login_required
 def changePasswordPage(request):
     current_user = request.user
 
@@ -59,21 +61,25 @@ def changePasswordPage(request):
 
     return render(request, 'changePassword.html')
 
+@login_required
 def logoutPage(request):
     logout(request)
     return redirect('loginPage')
 
+@login_required
 def profilePage(request):
     return render(request, 'profile.html')
 
-
+@login_required
 def homePage(request):
     return render(request, 'home.html')
 
+@login_required
 def jobFeedPage(request):
     jobs = JobModel.objects.all()
     return render(request, 'jobFeed.html',{'jobs':jobs})
 
+@login_required
 def addJobPage(request):
     if request.method == 'POST':
         JobTitle = request.POST.get('JobTitle')
@@ -91,10 +97,12 @@ def addJobPage(request):
         return redirect('jobFeedPage')
     return render(request, 'addJob.html')
 
+@login_required
 def jobViewPage(request,id):
     job = JobModel.objects.get(id=id)
     return render(request, 'jobView.html', {'job':job})
 
+@login_required
 def jobEditPage(request,id):
     jobUpdate = JobModel.objects.get(id=id)
     if request.method == 'POST':
@@ -109,7 +117,7 @@ def jobEditPage(request,id):
         return redirect('jobFeedPage')
     return render(request, 'jobEdit.html',{'jobUpdate':jobUpdate})
 
-
+@login_required
 def jobDeletePage(request,id):
     job = JobModel.objects.get(id=id)
     job.delete()
