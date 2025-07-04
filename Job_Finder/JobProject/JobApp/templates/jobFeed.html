@@ -1,7 +1,7 @@
 {% extends 'master.html' %}
-{% block title %}Job Feed{% endblock %}
 
-{% block content %}
+
+{% block body %}
 <div class="container py-4">
   <h2 class="mb-4">Job Feed</h2>
 
@@ -11,7 +11,7 @@
         <div class="col">
           <div class="card h-100 shadow-sm">
             {% if job.CompanyLogo %}
-              <img src="{{ job.CompanyLogo.url }}" class="card-img-top" alt="Company Logo" style="max-height: 200px; object-fit: contain;">
+              <img src="/{{ job.CompanyLogo }}" class="card-img-top" alt="Company Logo" style="max-height: 200px; object-fit: contain;">
             {% endif %}
             <div class="card-body">
               <h5 class="card-title">{{ job.JobTitle }}</h5>
@@ -29,4 +29,4 @@
     <p>No job posts available.</p>
   {% endif %}
 </div>
-{% endblock %}
+{% endblock body %}

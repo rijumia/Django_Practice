@@ -9,7 +9,9 @@ urlpatterns = [
     path('changePassword/', changePasswordPage, name='changePasswordPage'),
     path('logoutPage/', logoutPage, name='logoutPage'),
 
-    path('homePgae/', homePgae, name='homePgae'),
-    path('jobFeedPgae/', jobFeedPgae, name='jobFeedPgae'),
-    path('addJobPgae/', addJobPgae, name='addJobPgae'),
-]
+    path('profile/', profilePage, name='profilePage'),    
+
+    path('homePage/', homePage, name='homePage'),
+    path('jobFeedPage/', jobFeedPage, name='jobFeedPage'),
+    path('addJobPage/', addJobPage, name='addJobPage'),
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
