@@ -9,6 +9,9 @@ class CustomUserModel(AbstractUser):
     phone_no = models.CharField(max_length=15, null=True)
     Bio = models.TextField(null=True)
 
+    def __str__(self):
+        return self.user_type
+
 class JobModel(models.Model):
     JobTitle = models.CharField(max_length=50, null=True)
     JobDescription = models.TextField(null=True)
